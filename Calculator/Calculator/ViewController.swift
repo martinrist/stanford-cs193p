@@ -53,35 +53,18 @@ class ViewController: UIViewController {
         
         switch operation {
         case "×":
-            performOperation(multiply)
+            performOperation({(x: Double, y: Double) -> Double in return y * x})
         case "÷":
-            performOperation(divide)
+            performOperation({(x: Double, y: Double) -> Double in return y / x})
         case "+":
-            performOperation(add)
+            performOperation({(x: Double, y: Double) -> Double in return y + x})
         case "−":
-            performOperation(subtract)
+            performOperation({(x: Double, y: Double) -> Double in return y - x})
         default: break
             
         }
         
     }
-    
-    func multiply(x: Double, y: Double) -> Double {
-        return y * x
-    }
-    
-    func divide(x: Double, y: Double) -> Double {
-        return y / x
-    }
-    
-    func add(x: Double, y: Double) -> Double {
-        return y + x
-    }
-    
-    func subtract(x: Double, y: Double) -> Double {
-        return y - x
-    }
-    
     
     func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
