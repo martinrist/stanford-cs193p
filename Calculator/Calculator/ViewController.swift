@@ -54,25 +54,33 @@ class ViewController: UIViewController {
         switch operation {
         case "×":
             if operandStack.count >= 2 {
-                displayValue = operandStack.removeLast() * operandStack.removeLast()
+                let op1 = operandStack.removeLast()
+                let op2 = operandStack.removeLast()
+                displayValue = op2 * op1
                 enter()
             }
             
         case "÷":
             if operandStack.count >= 2 {
-                displayValue = operandStack.removeLast() / operandStack.removeLast()
+                let op1 = operandStack.removeLast()
+                let op2 = operandStack.removeLast()
+                displayValue = op2 / op1
                 enter()
             }
 
         case "+":
             if operandStack.count >= 2 {
-                displayValue = operandStack.removeLast() + operandStack.removeLast()
+                let op1 = operandStack.removeLast()
+                let op2 = operandStack.removeLast()
+                displayValue = op2 + op1
                 enter()
             }
 
         case "−":
             if operandStack.count >= 2 {
-                displayValue = operandStack.removeLast() - operandStack.removeLast()
+                let op1 = operandStack.removeLast()
+                let op2 = operandStack.removeLast()
+                displayValue = op2 - op1
                 enter()
             }
 
