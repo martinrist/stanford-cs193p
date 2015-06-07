@@ -12,7 +12,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     
+    var displayValue: Double {
+        get {
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set {
+            display.text = "\(newValue)"
+            enteringNumber = false
+        }
+    }
+    
     var enteringNumber: Bool = false
+    var operandStack = Array<Double>()
     
     @IBAction func appendDigit(sender: UIButton) {
         
@@ -27,5 +38,13 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func enter() {
+        enteringNumber = false
+        operandStack.append(displayValue)
+        println("\(operandStack)")
+    }
+ 
+    
+    
 }
 
