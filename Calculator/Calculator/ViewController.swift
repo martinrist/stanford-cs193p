@@ -53,45 +53,43 @@ class ViewController: UIViewController {
         
         switch operation {
         case "×":
-            if operandStack.count >= 2 {
-                let op1 = operandStack.removeLast()
-                let op2 = operandStack.removeLast()
-                displayValue = op2 * op1
-                enter()
-            }
-            
+            performOperation(multiply)
         case "÷":
-            if operandStack.count >= 2 {
-                let op1 = operandStack.removeLast()
-                let op2 = operandStack.removeLast()
-                displayValue = op2 / op1
-                enter()
-            }
-
+            performOperation(divide)
         case "+":
-            if operandStack.count >= 2 {
-                let op1 = operandStack.removeLast()
-                let op2 = operandStack.removeLast()
-                displayValue = op2 + op1
-                enter()
-            }
-
+            performOperation(add)
         case "−":
-            if operandStack.count >= 2 {
-                let op1 = operandStack.removeLast()
-                let op2 = operandStack.removeLast()
-                displayValue = op2 - op1
-                enter()
-            }
-
+            performOperation(subtract)
         default: break
             
         }
         
-        
     }
     
-
+    func multiply(x: Double, y: Double) -> Double {
+        return y * x
+    }
+    
+    func divide(x: Double, y: Double) -> Double {
+        return y / x
+    }
+    
+    func add(x: Double, y: Double) -> Double {
+        return y + x
+    }
+    
+    func subtract(x: Double, y: Double) -> Double {
+        return y - x
+    }
+    
+    
+    func performOperation(operation: (Double, Double) -> Double) {
+        if operandStack.count >= 2 {
+            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
+            enter()
+        }
+    }
+    
     
 }
 
