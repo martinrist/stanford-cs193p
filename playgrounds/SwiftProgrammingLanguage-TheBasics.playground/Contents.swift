@@ -1,6 +1,6 @@
-//: Playground - noun: a place where people can play
-
-import UIKit
+/*******************************************
+ * Swift Programming Language - The Basics *
+ *******************************************/
 
 /***************************
  * Constants and Variables *
