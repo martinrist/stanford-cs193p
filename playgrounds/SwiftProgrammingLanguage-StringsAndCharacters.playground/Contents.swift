@@ -2,9 +2,9 @@
 * Swift Programming Language - Strings & Characters *
 *****************************************************/
 
-// Strings have an .isEmpty property
-var emptyString = ""
-emptyString.isEmpty
+/******************************
+ * Mutability and Value Types *
+ ******************************/
 
 // Strings assigned to constants are immutable
 // whereas those assigned to variables are mutable
@@ -13,7 +13,6 @@ let immutableString = "Hello"
 
 var mutableString = "Hello"
 mutableString += " world!"
-
 
 // Strings are value types, so they have copy-by-value semantics
 func addBangs(var input: String) {
@@ -26,12 +25,23 @@ addBangs(myString)
 println(myString)
 
 
+
+/**************
+ * Characters *
+ **************/
+
 // Individual characters can be created by providing a Character type annotation
 let bang : Character = "!"
 
 // We can create a string by passing [Character] to the String initialiser
 let catChars: [Character] = ["C", "a", "t"]
 let catString = String(catChars)
+
+
+
+/*****************
+ * Concatenating *
+ *****************/
 
 // Concatenation and appending
 let string1 = "Hello"
@@ -41,15 +51,35 @@ welcome += ", Martin"
 welcome.append(bang)
 
 
+
+/*****************
+ * Interpolation *
+ *****************/
+
 // String interpolation
 let multiplier = 3
 let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
+
+
+
+/***************
+ * String size *
+ ***************/
+
+// Strings have an .isEmpty property
+var emptyString = ""
+emptyString.isEmpty
 
 
 // Use global count() function to count length of String
 let hello = "Hello"
 count(hello)
 
+
+
+/******************
+ * String Indices *
+ ******************/
 
 // Cannot access String components by index
 // hello[0]        // this is a compilation error
@@ -75,6 +105,11 @@ for i in indices(hello) {
 }
 
 
+
+/**************************
+ * Inserting and Removing *
+ **************************/
+
 // To insert content into a string, use insert:
 var welcome2 = "hello"
 welcome2.insert("!", atIndex: welcome2.endIndex)
@@ -92,6 +127,10 @@ welcome2.removeRange(range)
 welcome2
 
 
+
+/*************
+ * Comparing *
+ *************/
 
 // Check whether string contains another suffix or prefix
 let testString = "Hello World"
