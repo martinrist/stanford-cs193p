@@ -74,6 +74,12 @@ class ViewController: UIViewController {
             performOperation { $1 - $0 }
         case "√":
             performOperation { sqrt($0) }
+        case "sin":
+            performOperation { sin($0) }
+        case "cos":
+            performOperation { cos($0) }
+        case "π":
+            performOperation { M_PI }
         default: break
             
         }
@@ -92,6 +98,11 @@ class ViewController: UIViewController {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
             enter()
         }
+    }
+    
+    private func performOperation(operation: () -> Double) {
+        displayValue = operation()
+        enter()
     }
     
     
