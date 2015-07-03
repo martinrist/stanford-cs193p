@@ -28,27 +28,20 @@ class ViewController: UIViewController {
     @IBAction func appendDigit(sender: UIButton) {
         
         let digit = sender.currentTitle!
-        append(digit)
-    }
+        
+        // If we're already entering a number and we're trying to add
+        // a second decimal point, then abort
+        if (digit == "." && enteringNumber
+            && display.text!.rangeOfString(".") != nil) { return }
 
-    @IBAction func appendDecimalPoint() {
-        
-        if !enteringNumber {
-            append("0.")
-        } else if display.text!.rangeOfString(".") == nil {
-            append(".")
-        }
-    }
-    
-    private func append(s: String) {
-        
         if enteringNumber {
-            display.text = display.text! + s
+            display.text = display.text! + digit
         } else {
-            display.text = s
+            display.text = digit
             enteringNumber = true
         }
     }
+   
     
     @IBAction func enter() {
         enteringNumber = false
