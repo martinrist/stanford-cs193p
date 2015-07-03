@@ -29,6 +29,11 @@ class ViewController: UIViewController {
         
         let digit = sender.currentTitle!
         
+        // If we're already entering a number and we're trying to add
+        // a second decimal point, then abort
+        if (digit == "." && enteringNumber
+                         && display.text!.rangeOfString(".") != nil) { return }
+
         if enteringNumber {
             display.text = display.text! + digit
         } else {
