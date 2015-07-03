@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var history: UITextView!
     @IBOutlet weak var display: UILabel!
     
     var displayValue: Double {
@@ -47,8 +48,13 @@ class ViewController: UIViewController {
         enteringNumber = false
         operandStack.append(displayValue)
         println("\(operandStack)")
+        appendHistory("\(displayValue)");
     }
- 
+    
+    private func appendHistory(s: String) {
+        history.text = s + "\n" + history.text!
+    }
+    
     @IBAction func operate(sender: UIButton) {
         
         let operation = sender.currentTitle!
@@ -56,6 +62,8 @@ class ViewController: UIViewController {
             enter()
         }
         
+        appendHistory("\(operation)");
+
         switch operation {
         case "×":
             performOperation { $1 * $0 }
