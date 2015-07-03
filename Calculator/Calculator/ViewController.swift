@@ -42,7 +42,16 @@ class ViewController: UIViewController {
             enteringNumber = true
         }
     }
-   
+
+
+    @IBAction func clear() {
+        
+        history.text! = ""
+        enteringNumber = false
+        operandStack.removeAll()
+        display.text! = "0"
+        
+    }
     
     @IBAction func enter() {
         enteringNumber = false
