@@ -28,16 +28,28 @@ class ViewController: UIViewController {
     @IBAction func appendDigit(sender: UIButton) {
         
         let digit = sender.currentTitle!
-        
-        if enteringNumber {
-            display.text = display.text! + digit
-        } else {
-            display.text = digit
-            enteringNumber = true
-        }
-        
+        append(digit)
     }
 
+    @IBAction func appendDecimalPoint() {
+        
+        if !enteringNumber {
+            append("0.")
+        } else if display.text!.rangeOfString(".") == nil {
+            append(".")
+        }
+    }
+    
+    private func append(s: String) {
+        
+        if enteringNumber {
+            display.text = display.text! + s
+        } else {
+            display.text = s
+            enteringNumber = true
+        }
+    }
+    
     @IBAction func enter() {
         enteringNumber = false
         operandStack.append(displayValue)
