@@ -43,6 +43,16 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func negate() {
+        if enteringNumber {
+            displayValue = -displayValue
+            enteringNumber = true
+        } else {
+            performOperation { -$0 }
+        }
+        
+    }
+    
     @IBAction func clear() {
         history.text! = ""
         enteringNumber = false
@@ -72,13 +82,12 @@ class ViewController: UIViewController {
     @IBAction func backspace() {
 
         if !enteringNumber { return }
+
+        display.text = dropLast(display.text!)
         
-        if count(display.text!) == 1 {
-            // TODO: Handle -ve numbers once we've implemented +/-
+        if (display.text! == "") || (display.text! == "-") {
             display.text! = "0"
             enteringNumber = false
-        } else {
-            display.text = dropLast(display.text!)
         }
     }
     
