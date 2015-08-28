@@ -43,28 +43,35 @@ class ViewController: UIViewController {
         }
     }
 
-
     @IBAction func clear() {
-        
         history.text! = ""
         enteringNumber = false
         operandStack.removeAll()
         display.text! = "0"
-        
+    }
+    
+    private func updateStackAndHistory(value: Double, isOperationResult: Bool) {
+        enteringNumber = false;
+        operandStack.append(value)
+        println("\(operandStack)")
+        if isOperationResult {
+            appendHistory("= \(value)")
+        } else {
+            appendHistory("\(value)")
+        }
+    }
+
+    private func appendHistory(s: String) {
+        history.text = s + "\n" + history.text!
     }
     
     @IBAction func enter() {
-        enteringNumber = false
-        operandStack.append(displayValue)
-        println("\(operandStack)")
-        appendHistory("\(displayValue)");
+        updateStackAndHistory(displayValue, isOperationResult: false)
     }
     
     @IBAction func backspace() {
 
-        if !enteringNumber {
-            return;
-        }
+        if !enteringNumber { return }
         
         if count(display.text!) == 1 {
             // TODO: Handle -ve numbers once we've implemented +/-
@@ -73,11 +80,6 @@ class ViewController: UIViewController {
         } else {
             display.text = dropLast(display.text!)
         }
-        
-    }
-    
-    private func appendHistory(s: String) {
-        history.text = s + "\n" + history.text!
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -109,26 +111,25 @@ class ViewController: UIViewController {
         default: break
             
         }
-        
     }
 
     private func performOperation(operation: Double -> Double) {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
-            enter()
+            updateStackAndHistory(displayValue, isOperationResult: true)
         }
     }
     
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
+            updateStackAndHistory(displayValue, isOperationResult: true)
         }
     }
     
     private func performOperation(operation: () -> Double) {
         displayValue = operation()
-        enter()
+        updateStackAndHistory(displayValue, isOperationResult: true)
     }
     
     
