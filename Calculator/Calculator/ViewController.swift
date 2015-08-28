@@ -60,6 +60,22 @@ class ViewController: UIViewController {
         appendHistory("\(displayValue)");
     }
     
+    @IBAction func backspace() {
+
+        if !enteringNumber {
+            return;
+        }
+        
+        if count(display.text!) == 1 {
+            // TODO: Handle -ve numbers once we've implemented +/-
+            display.text! = "0"
+            enteringNumber = false
+        } else {
+            display.text = dropLast(display.text!)
+        }
+        
+    }
+    
     private func appendHistory(s: String) {
         history.text = s + "\n" + history.text!
     }
