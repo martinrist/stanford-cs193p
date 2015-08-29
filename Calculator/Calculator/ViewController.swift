@@ -46,6 +46,7 @@ class ViewController: UIViewController {
     @IBAction func negate() {
         if enteringNumber {
             displayValue = -displayValue
+            // Need to reset enteringNumber, because the displayValue setter has reset it to false
             enteringNumber = true
         } else {
             performOperation { -$0 }
@@ -60,7 +61,7 @@ class ViewController: UIViewController {
         display.text! = "0"
     }
     
-    private func updateStackAndHistory(value: Double, isOperationResult: Bool) {
+    private func pushValue(value: Double, isOperationResult: Bool) {
         enteringNumber = false;
         operandStack.append(value)
         println("\(operandStack)")
@@ -76,7 +77,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func enter() {
-        updateStackAndHistory(displayValue, isOperationResult: false)
+        pushValue(displayValue, isOperationResult: false)
     }
     
     @IBAction func backspace() {
@@ -125,20 +126,20 @@ class ViewController: UIViewController {
     private func performOperation(operation: Double -> Double) {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
-            updateStackAndHistory(displayValue, isOperationResult: true)
+            pushValue(displayValue, isOperationResult: true)
         }
     }
     
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            updateStackAndHistory(displayValue, isOperationResult: true)
+            pushValue(displayValue, isOperationResult: true)
         }
     }
     
     private func performOperation(operation: () -> Double) {
         displayValue = operation()
-        updateStackAndHistory(displayValue, isOperationResult: true)
+        pushValue(displayValue, isOperationResult: true)
     }
     
     
