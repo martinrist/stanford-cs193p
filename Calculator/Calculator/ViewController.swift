@@ -13,12 +13,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var history: UITextView!
     @IBOutlet weak var display: UILabel!
     
-    var displayValue: Double {
+    var displayValue: Double? {
         get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            if let num = NSNumberFormatter().numberFromString(display.text!) {
+                return num.doubleValue
+            } else {
+                return nil
+            }
         }
         set {
-            display.text = "\(newValue)"
+            if let valText = newValue {
+                display.text = "\(valText)"
+            } else {
+                display.text = "NaN"
+            }
+
             enteringNumber = false
         }
     }
@@ -45,7 +54,7 @@ class ViewController: UIViewController {
 
     @IBAction func negate() {
         if enteringNumber {
-            displayValue = -displayValue
+            displayValue = -displayValue!
             // Need to reset enteringNumber, because the displayValue setter has reset it to false
             enteringNumber = true
         } else {
@@ -61,14 +70,16 @@ class ViewController: UIViewController {
         display.text! = "0"
     }
     
-    private func pushValue(value: Double, isOperationResult: Bool) {
+    private func pushValue(value: Double?, isOperationResult: Bool) {
         enteringNumber = false;
-        operandStack.append(value)
-        println("\(operandStack)")
-        if isOperationResult {
-            appendHistory("= \(value)")
-        } else {
-            appendHistory("\(value)")
+        if let val = value {
+            operandStack.append(val)
+            println("\(operandStack)")
+            if isOperationResult {
+                appendHistory("= \(val)")
+            } else {
+                appendHistory("\(val)")
+            }
         }
     }
 
@@ -77,7 +88,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func enter() {
-        pushValue(displayValue, isOperationResult: false)
+        pushValue(displayValue!, isOperationResult: false)
     }
     
     @IBAction func backspace() {
@@ -123,21 +134,21 @@ class ViewController: UIViewController {
         }
     }
 
-    private func performOperation(operation: Double -> Double) {
+    private func performOperation(operation: Double -> Double?) {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
             pushValue(displayValue, isOperationResult: true)
         }
     }
     
-    private func performOperation(operation: (Double, Double) -> Double) {
+    private func performOperation(operation: (Double, Double) -> Double?) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
             pushValue(displayValue, isOperationResult: true)
         }
     }
     
-    private func performOperation(operation: () -> Double) {
+    private func performOperation(operation: () -> Double?) {
         displayValue = operation()
         pushValue(displayValue, isOperationResult: true)
     }
