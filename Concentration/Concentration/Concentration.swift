@@ -11,10 +11,11 @@ import GameplayKit
 
 class Concentration {
 
-    var flipCount = 0
-    var score = 0
-    var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private(set) var flipCount = 0
+    private(set) var score = 0
+    private(set) var cards = [Card]()
+
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
