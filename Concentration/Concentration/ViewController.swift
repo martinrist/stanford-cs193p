@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var game: Concentration!
 
     @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
 
     var flipCount: Int = 0 {
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
     }
 
     func updateViewFromModel() {
+        gameScoreLabel.text? = "Score: \(game.score)"
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]

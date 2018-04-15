@@ -11,17 +11,36 @@ import GameplayKit
 
 class Concentration {
 
+    var score = 0
     var cards = [Card]()
     var indexOfOneAndOnlyFaceUpCard: Int?
 
     func chooseCard(at index: Int) {
         if !cards[index].isMatched {
+
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-                // check if match
+
                 if cards[matchIndex].identifier == cards[index].identifier {
+
+                    // Cards matched - score +2
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    score += 2
+
+                } else {
+
+                    // Cards not matched
+                    // Penalise 1 point for each card previously in a mismatch
+                    if cards[matchIndex].wasInvolvedInMismatch {
+                        score -= 1
+                    }
+                    if cards[index].wasInvolvedInMismatch {
+                        score -= 1
+                    }
+                    cards[matchIndex].wasInvolvedInMismatch = true
+                    cards[index].wasInvolvedInMismatch = true
                 }
+
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
 
