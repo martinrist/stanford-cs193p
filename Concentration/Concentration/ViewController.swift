@@ -14,6 +14,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var gameScoreLabel: UILabel!
+    @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet var cardButtons: [UIButton]!
 
     override func viewDidLoad() {
@@ -48,30 +49,36 @@ class ViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : theme.foreground
             }
         }
     }
 
-    let emojiThemes = [
-        "halloween": [ "🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"],
-        "sports"   : [ "🏈", "⚽️", "⚾️", "🏏", "🎾", "🏉"],
-        "animals"  : [ "🐈", "🐩", "🐍", "🐌", "🦓", "🦁", "🐘"]
+    var theme: Theme!
+
+    let themes = [
+        "halloween": Theme(emojiChoices: [ "🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"], background: UIColor.black, foreground: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)),
+        "sports"   : Theme(emojiChoices: [ "🏈", "⚽️", "⚾️", "🏏", "🎾", "🏉"], background: UIColor.green, foreground: UIColor.white),
+        "animals"  : Theme(emojiChoices: [ "🐈", "🐩", "🐍", "🐌", "🦓", "🦁", "🐘"], background: UIColor.yellow, foreground: UIColor.black)
     ]
 
     func pickTheme() {
-        let themeIndex = Int(arc4random_uniform(UInt32(emojiThemes.count)))
-        emojiChoices = Array(emojiThemes.values)[themeIndex]
-    }
+        let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
+        theme = Array(themes.values)[themeIndex]
 
-    var emojiChoices = [String]()
+        view.backgroundColor = theme.background
+        flipCountLabel.textColor = theme.foreground
+        gameScoreLabel.textColor = theme.foreground
+        newGameButton.setTitleColor(theme.foreground, for: .normal)
+
+    }
 
     var emoji = [Int:String]()
 
     func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+        if emoji[card.identifier] == nil, theme.emojiChoices.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(theme.emojiChoices.count)))
+            emoji[card.identifier] = theme.emojiChoices.remove(at: randomIndex)
         }
 
         return emoji[card.identifier] ?? "?"
@@ -79,3 +86,9 @@ class ViewController: UIViewController {
 
 }
 
+
+struct Theme {
+    var emojiChoices: [String]
+    let background: UIColor
+    let foreground: UIColor
+}
