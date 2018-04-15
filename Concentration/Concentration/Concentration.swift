@@ -11,14 +11,22 @@ import GameplayKit
 
 class Concentration {
 
+    var flipCount = 0
     var score = 0
     var cards = [Card]()
     var indexOfOneAndOnlyFaceUpCard: Int?
 
     func chooseCard(at index: Int) {
+
         if !cards[index].isMatched {
 
+            if indexOfOneAndOnlyFaceUpCard == nil {
+                flipCount += 1
+            }
+
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
+
+                flipCount += 1
 
                 if cards[matchIndex].identifier == cards[index].identifier {
 

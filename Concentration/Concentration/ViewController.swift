@@ -16,18 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
 
-    var flipCount: Int = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
-
     override func viewDidLoad() {
         newGame()
     }
 
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -38,13 +31,14 @@ class ViewController: UIViewController {
 
     @IBAction func newGame() {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-        flipCount = 0
         pickTheme()
         updateViewFromModel()
     }
 
     func updateViewFromModel() {
         gameScoreLabel.text? = "Score: \(game.score)"
+        flipCountLabel.text = "Flips: \(game.flipCount)"
+
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
