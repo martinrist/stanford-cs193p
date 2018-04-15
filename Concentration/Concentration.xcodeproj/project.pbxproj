@@ -42,7 +42,6 @@
 		29CD9C3D20092BA1002DF1F6 = {
 			isa = PBXGroup;
 			children = (
-				293CF92A2083644400F8BEE6 /* Card.swift */,
 				29CD9C4820092BA1002DF1F6 /* Concentration */,
 				29CD9C4720092BA1002DF1F6 /* Products */,
 			);
@@ -62,6 +61,7 @@
 				29CD9C5B20092BB5002DF1F6 /* Supporting Files */,
 				29CD9C4B20092BA2002DF1F6 /* ViewController.swift */,
 				293CF9282083643000F8BEE6 /* Concentration.swift */,
+				293CF92A2083644400F8BEE6 /* Card.swift */,
 				29CD9C4D20092BA2002DF1F6 /* Main.storyboard */,
 				29CD9C5520092BA2002DF1F6 /* Info.plist */,
 			);
