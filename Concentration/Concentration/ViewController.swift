@@ -12,6 +12,10 @@ class ViewController: UIViewController {
 
     var game: Concentration!
 
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count + 1) / 2
+    }
+
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet weak var newGameButton: UIButton!
@@ -31,7 +35,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func newGame() {
-        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         pickTheme()
         updateViewFromModel()
     }
@@ -65,7 +69,6 @@ class ViewController: UIViewController {
     func pickTheme() {
         let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
         theme = Array(themes.values)[themeIndex]
-
         view.backgroundColor = theme.background
         flipCountLabel.textColor = theme.foreground
         gameScoreLabel.textColor = theme.foreground
