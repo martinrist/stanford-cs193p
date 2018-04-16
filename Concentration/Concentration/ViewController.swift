@@ -61,9 +61,9 @@ class ViewController: UIViewController {
     private var theme: Theme!
 
     private let themes = [
-        "halloween": Theme(emojiChoices: [ "🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"], background: UIColor.black, foreground: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)),
-        "sports"   : Theme(emojiChoices: [ "🏈", "⚽️", "⚾️", "🏏", "🎾", "🏉"], background: UIColor.green, foreground: UIColor.white),
-        "animals"  : Theme(emojiChoices: [ "🐈", "🐩", "🐍", "🐌", "🦓", "🦁", "🐘"], background: UIColor.yellow, foreground: UIColor.black)
+        "halloween": Theme(emojiChoices: "🦇😱🙀😈🎃👻🍭🍬🍎", background: UIColor.black, foreground: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)),
+        "sports"   : Theme(emojiChoices: "🏈⚽️⚾️🏏🎾🏉", background: UIColor.green, foreground: UIColor.white),
+        "animals"  : Theme(emojiChoices: "🐈🐩🐍🐌🦓🦁🐘", background: UIColor.yellow, foreground: UIColor.black)
     ]
 
     private func pickTheme() {
@@ -80,7 +80,8 @@ class ViewController: UIViewController {
 
     private func emoji(for card: Card) -> String {
         if emoji[card] == nil, theme.emojiChoices.count > 0 {
-            emoji[card] = theme.emojiChoices.remove(at: theme.emojiChoices.count.arc4random)
+            let randomStringIndex = theme.emojiChoices.index(theme.emojiChoices.startIndex, offsetBy: theme.emojiChoices.count.arc4random)
+            emoji[card] = String(theme.emojiChoices.remove(at: randomStringIndex))
         }
 
         return emoji[card] ?? "?"
@@ -90,7 +91,7 @@ class ViewController: UIViewController {
 
 
 struct Theme {
-    var emojiChoices: [String]
+    var emojiChoices: String
     let background: UIColor
     let foreground: UIColor
 }
