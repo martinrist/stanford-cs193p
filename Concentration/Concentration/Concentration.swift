@@ -50,7 +50,7 @@ class Concentration {
 
                 flipCount += 1
 
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index] {
 
                     // Cards matched - score +2
                     cards[matchIndex].isMatched = true

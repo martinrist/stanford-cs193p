@@ -76,14 +76,14 @@ class ViewController: UIViewController {
 
     }
 
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
 
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, theme.emojiChoices.count > 0 {
-            emoji[card.identifier] = theme.emojiChoices.remove(at: theme.emojiChoices.count.arc4random)
+        if emoji[card] == nil, theme.emojiChoices.count > 0 {
+            emoji[card] = theme.emojiChoices.remove(at: theme.emojiChoices.count.arc4random)
         }
 
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 
 }
