@@ -60,9 +60,11 @@ struct SetGame {
     if selectedCards.count == 3 {
       if isMatch(card1: selectedCards[0], card2: selectedCards[1], card3: selectedCards[2]) {
         // Remove cards from board
-        board[board.index(of: selectedCards[0])!] = nil
-        board[board.index(of: selectedCards[1])!] = nil
-        board[board.index(of: selectedCards[2])!] = nil
+        for (index, card) in board.enumerated() {
+          if let card = card, selectedCards.contains(card) {
+            board[index] = nil
+          }
+        }
         deal(numberOfCards: 3)
       }
       selectedCards.removeAll()
