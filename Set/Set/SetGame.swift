@@ -31,10 +31,13 @@ struct SetGame {
     board = Array(repeating: nil, count: boardSize)
   }
 
-  mutating func deal() {
-    guard deck.count > 0 else { return }
-    if let index = firstEmptySpace {
-      board[index] = deck.remove(at: 0)
+  mutating func deal(numberOfCards: Int = 1) {
+    guard deck.count >= numberOfCards else { return }
+
+    for _ in 1...numberOfCards {
+      if let index = firstEmptySpace {
+        board[index] = deck.remove(at: 0)
+      }
     }
   }
 
@@ -47,6 +50,27 @@ struct SetGame {
     return nil
   }
 
+  mutating func select(_ card: Card) {
+
+    if selectedCards.contains(card) {
+      selectedCards.remove(at: selectedCards.index(of: card)!)
+      return
+    }
+
+    if selectedCards.count == 3 {
+      if isMatch(card1: selectedCards[0], card2: selectedCards[1], card3: selectedCards[2]) {
+        // Remove cards from board
+        board[board.index(of: selectedCards[0])!] = nil
+        board[board.index(of: selectedCards[1])!] = nil
+        board[board.index(of: selectedCards[2])!] = nil
+        deal(numberOfCards: 3)
+      }
+      selectedCards.removeAll()
+    }
+
+    selectedCards.append(card)
+
+  }
 
   // Implement the matching rules for Set:
   //Three cards form a set iff they satisfy all of these conditions:

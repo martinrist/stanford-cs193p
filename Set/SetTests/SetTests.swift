@@ -41,9 +41,7 @@ class SetTests: XCTestCase {
 
   func testDealAllCardsToBoardThenBoardIsFull() {
     var game = SetGame(boardSize: 12)
-    for _ in 0..<12 {
-      game.deal()
-    }
+    game.deal(numberOfCards: 12)
     XCTAssert(game.firstEmptySpace == nil)
     XCTAssert(game.deck.count == 81 - 12)
   }
@@ -66,6 +64,64 @@ class SetTests: XCTestCase {
     XCTAssertFalse(game.isMatch(card1: card1, card2: card2, card3: card3))
   }
 
+  func testSelectThreeCardsFormingSet() {
+    var game = SetGame(boardSize: 6)
+
+    let card1 = Card(number: 1, colour: .red, shape: .circle, shading: .clear)
+    let card2 = Card(number: 2, colour: .red, shape: .square, shading: .clear)
+    let card3 = Card(number: 3, colour: .red, shape: .triangle, shading: .clear)
+    let card4 = Card(number: 1, colour: .green, shape: .triangle, shading: .clear)
+    let card5 = Card(number: 2, colour: .green, shape: .triangle, shading: .clear)
+    let card6 = Card(number: 3, colour: .green, shape: .triangle, shading: .clear)
+
+    let deck = [ card1, card2, card3, card4, card5, card6 ]
+    game.deck = deck
+
+    game.deal(numberOfCards: 3)
+    game.select(card1)
+    game.select(card2)
+    game.select(card3)
+    game.select(card4)
+
+    XCTAssertEqual(game.selectedCards.count, 1)
+    XCTAssertEqual(game.selectedCards[0], card4)
+    XCTAssertFalse(game.board.contains(card1))
+    XCTAssertFalse(game.board.contains(card2))
+    XCTAssertFalse(game.board.contains(card3))
+    XCTAssertTrue(game.board.contains(card4))
+    XCTAssertTrue(game.board.contains(card5))
+    XCTAssertTrue(game.board.contains(card6))
+
+  }
+
+  func testSelectThreeCardsNotFormingSet() {
+    var game = SetGame(boardSize: 6)
+
+    let card1 = Card(number: 1, colour: .red, shape: .circle, shading: .clear)
+    let card2 = Card(number: 2, colour: .red, shape: .square, shading: .clear)
+    let card3 = Card(number: 2, colour: .red, shape: .triangle, shading: .clear)
+    let card4 = Card(number: 1, colour: .green, shape: .triangle, shading: .clear)
+    let card5 = Card(number: 2, colour: .green, shape: .triangle, shading: .clear)
+    let card6 = Card(number: 3, colour: .green, shape: .triangle, shading: .clear)
+
+    let deck = [ card1, card2, card3, card4, card5, card6 ]
+    game.deck = deck
+
+    game.deal(numberOfCards: 3)
+    game.select(card1)
+    game.select(card2)
+    game.select(card3)
+    game.select(card4)
+
+    XCTAssertEqual(game.selectedCards.count, 1)
+    XCTAssertEqual(game.selectedCards[0], card4)
+    XCTAssertTrue(game.board.contains(card1))
+    XCTAssertTrue(game.board.contains(card2))
+    XCTAssertTrue(game.board.contains(card3))
+    XCTAssertFalse(game.board.contains(card4))
+    XCTAssertFalse(game.board.contains(card5))
+    XCTAssertFalse(game.board.contains(card6))
+  }
 }
 
 
