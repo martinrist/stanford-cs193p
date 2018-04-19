@@ -46,6 +46,10 @@ class SetGameViewController: UIViewController {
     game.selectedCards.removeAll()
   }
 
+  @IBAction func newGame(_ sender: Any) {
+    newGame()
+  }
+
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
     game.shuffle()
@@ -54,9 +58,10 @@ class SetGameViewController: UIViewController {
 
   private func updateViewFromModel() {
 
-    cardsRemainingLabel.text = "Cards Remaining: \(game.deck.count)"
+    cardsRemainingLabel.text = "Cards Left: \(game.deck.count)"
 
-    if game.deck.count == 0 || game.firstEmptySpace == nil {
+    if game.deck.count == 0 || (game.firstEmptySpace == nil &&
+      !game.isMatch(cards: game.selectedCards)) {
       dealMoreCardsButton.isEnabled = false
     } else {
       dealMoreCardsButton.isEnabled = true
@@ -68,16 +73,15 @@ class SetGameViewController: UIViewController {
 
       if let card = card {
         button.isEnabled = true
-        let nsattrstring = renderCardTitle(for: card)
-        button.setAttributedTitle(nsattrstring, for: .normal)
+        button.layer.borderWidth = 2.0
+        button.layer.cornerRadius = 8.0
+
+        button.setAttributedTitle(renderCardTitle(for: card), for: .normal)
 
         if game.selectedCards.contains(card) {
-          button.layer.borderWidth = 3.0
-          button.layer.cornerRadius = 8.0
           button.layer.borderColor = UIColor.blue.cgColor
         } else {
-          button.layer.borderWidth = 0.0
-          button.layer.borderColor = UIColor.white.cgColor
+          button.layer.borderColor = UIColor.black.withAlphaComponent(0.25).cgColor
         }
       } else {
         button.isEnabled = false
