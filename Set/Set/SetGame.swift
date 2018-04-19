@@ -27,9 +27,11 @@ struct SetGame {
       }
     }
 
-    // TODO: Extract shuffling into separate method to make testing easier
-    deck = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: deck) as! [Card]
     board = Array(repeating: nil, count: boardSize)
+  }
+
+  mutating func shuffle() {
+    deck = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: deck) as! [Card]
   }
 
   mutating func deal(numberOfCards: Int = 1) {
