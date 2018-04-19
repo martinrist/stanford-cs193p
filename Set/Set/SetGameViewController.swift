@@ -37,7 +37,7 @@ class SetGameViewController: UIViewController {
 
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-   // game.shuffle()
+    game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
@@ -45,8 +45,6 @@ class SetGameViewController: UIViewController {
     for index in cardButtons.indices {
       let button = cardButtons[index]
       let card = game.board[index]
-
-
 
       if let card = card {
         button.isHidden = false
