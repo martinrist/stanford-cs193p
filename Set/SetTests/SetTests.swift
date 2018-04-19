@@ -149,29 +149,6 @@ class SetTests: XCTestCase {
     game.select(card2)
     XCTAssertEqual(game.selectedCards.count, 0)
   }
-
-  func testSelectThenDeselectThreeCards() {
-    var game = SetGame(boardSize: 6)
-    game.deal(numberOfCards: 3)
-    let card1 = game.board[0]!
-    let card2 = game.board[1]!
-    let card3 = game.board[2]!
-
-    game.select(card1)
-    game.select(card2)
-    game.select(card3)
-    XCTAssertEqual(game.selectedCards.count, 3)
-
-    game.select(card1)
-    XCTAssertEqual(game.selectedCards.count, 2)
-
-    game.select(card2)
-    XCTAssertEqual(game.selectedCards.count, 1)
-
-    game.select(card3)
-    XCTAssertEqual(game.selectedCards.count, 0)
-
-  }
 }
 
 

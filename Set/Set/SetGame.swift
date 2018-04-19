@@ -55,12 +55,16 @@ struct SetGame {
 
   mutating func select(_ card: Card) {
 
-    if selectedCards.contains(card) {
-      selectedCards.remove(at: selectedCards.index(of: card)!)
+    // When any card is chosen and there are already 3 non-matching cards selected
+    // deselect the non-matching cards and select the chosen card
+    if selectedCards.count == 3 && !isMatch(cards: selectedCards) {
+      selectedCards = [card]
       return
     }
 
-    if isMatch(cards: selectedCards) {
+    // When any card is chosen and there are already 3 matching cards, replace
+    // those three matching cards with new ones from the deck
+    if selectedCards.count == 3 && isMatch(cards: selectedCards) {
       // Remove cards from board
       for (index, card) in board.enumerated() {
         if let card = card, selectedCards.contains(card) {
@@ -68,13 +72,20 @@ struct SetGame {
         }
       }
       deal(numberOfCards: 3)
+      if selectedCards.contains(card) {
+        selectedCards.removeAll()
+      } else {
+        selectedCards = [card]
+      }
+      return
     }
 
-    if selectedCards.count == 3 {
-      selectedCards.removeAll()
+    // Deselect card if already selected, otherwise just select it
+    if selectedCards.contains(card) {
+      selectedCards.remove(at: selectedCards.index(of: card)!)
+    } else {
+      selectedCards.append(card)
     }
-
-    selectedCards.append(card)
 
   }
 
