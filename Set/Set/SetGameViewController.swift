@@ -45,9 +45,13 @@ class SetGameViewController: UIViewController {
     for index in cardButtons.indices {
       let button = cardButtons[index]
       let card = game.board[index]
-      button.setTitle(renderCardTitle(for: card), for: .normal)
+
+
 
       if let card = card {
+        button.isHidden = false
+        button.setTitle(renderCardTitle(for: card), for: .normal)
+
         if game.selectedCards.contains(card) {
           button.layer.borderWidth = 3.0
           button.layer.borderColor = UIColor.blue.cgColor
@@ -55,14 +59,16 @@ class SetGameViewController: UIViewController {
           button.layer.borderWidth = 0.0
           button.layer.borderColor = UIColor.white.cgColor
         }
+      } else {
+        button.isHidden = true
       }
     }
 
     if game.selectedCards.count == 3 {
       if game.isMatch(cards: game.selectedCards) {
-        updateSelectedBorder(toColour: UIColor.green)
+        updateSelectedBorder(toColour: .green)
       } else {
-        updateSelectedBorder(toColour: UIColor.red)
+        updateSelectedBorder(toColour: .red)
       }
     }
 
@@ -78,8 +84,7 @@ class SetGameViewController: UIViewController {
     }
   }
 
-  private func renderCardTitle(for card: Card?) -> String {
-    guard let card = card else { return "-" }
+  private func renderCardTitle(for card: Card) -> String {
 
     var title = String(card.number)
 
