@@ -252,6 +252,7 @@
                     </view>
                     <connections>
                         <outlet property="cardsRemainingLabel" destination="GFS-xF-cWA" id="RoS-dJ-FrN"/>
+                        <outlet property="dealMoreCardsButton" destination="ffO-Uy-Z8A" id="HuI-pH-mYa"/>
                         <outletCollection property="cardButtons" destination="kRF-a0-nvb" collectionClass="NSMutableArray" id="VN6-1n-p9y"/>
                         <outletCollection property="cardButtons" destination="DC9-0j-sbe" collectionClass="NSMutableArray" id="2p5-PM-AoO"/>
                         <outletCollection property="cardButtons" destination="Dvc-3p-Hja" collectionClass="NSMutableArray" id="AUr-LT-kIU"/>

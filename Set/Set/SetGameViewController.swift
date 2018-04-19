@@ -17,7 +17,8 @@ class SetGameViewController: UIViewController {
   }
 
   @IBOutlet private var cardButtons: [UIButton]!
-  @IBOutlet weak var cardsRemainingLabel: UILabel!
+  @IBOutlet private weak var cardsRemainingLabel: UILabel!
+  @IBOutlet private weak var dealMoreCardsButton: UIButton!
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
@@ -49,6 +50,12 @@ class SetGameViewController: UIViewController {
   private func updateViewFromModel() {
 
     cardsRemainingLabel.text = "Cards Remaining: \(game.deck.count)"
+
+    if game.deck.count == 0 || game.firstEmptySpace == nil {
+      dealMoreCardsButton.isEnabled = false
+    } else {
+      dealMoreCardsButton.isEnabled = true
+    }
 
     for index in cardButtons.indices {
       let button = cardButtons[index]
