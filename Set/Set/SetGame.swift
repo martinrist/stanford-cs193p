@@ -125,16 +125,6 @@ struct SetGame {
 }
 
 
-extension Collection where Element: Hashable {
-  var allMatch: Bool {
-    return Set<Element>(self).count == 1
-  }
-
-  var allDifferent: Bool {
-    return Set<Element>(self).count == self.count
-  }
-}
-
 
 
 

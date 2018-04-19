@@ -15,6 +15,8 @@
 		36C72ECE208775510094378F /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C72ECD208775510094378F /* SetTests.swift */; };
 		36C72ED92087756D0094378F /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C72ED82087756D0094378F /* SetGame.swift */; };
 		36C72EDB2087757A0094378F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C72EDA2087757A0094378F /* Card.swift */; };
+		36F421C620891F3200F7DD11 /* Collection+Matching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F421C520891F3200F7DD11 /* Collection+Matching.swift */; };
+		36F421C820891F4E00F7DD11 /* Collection+MatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F421C720891F4E00F7DD11 /* Collection+MatchingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		36C72ECF208775510094378F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36C72ED82087756D0094378F /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		36C72EDA2087757A0094378F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		36F421C520891F3200F7DD11 /* Collection+Matching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Matching.swift"; sourceTree = "<group>"; };
+		36F421C720891F4E00F7DD11 /* Collection+MatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+MatchingTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 				36C72EC4208775510094378F /* Info.plist */,
 				36C72ED82087756D0094378F /* SetGame.swift */,
 				36C72EDA2087757A0094378F /* Card.swift */,
+				36F421C520891F3200F7DD11 /* Collection+Matching.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 		36C72ECC208775510094378F /* SetTests */ = {
 			isa = PBXGroup;
 			children = (
+				36F421C720891F4E00F7DD11 /* Collection+MatchingTests.swift */,
 				36C72ECD208775510094378F /* SetTests.swift */,
 				36C72ECF208775510094378F /* Info.plist */,
 			);
@@ -203,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36F421C620891F3200F7DD11 /* Collection+Matching.swift in Sources */,
 				36C72EBB208775500094378F /* SetGameViewController.swift in Sources */,
 				36C72EB9208775500094378F /* AppDelegate.swift in Sources */,
 				36C72ED92087756D0094378F /* SetGame.swift in Sources */,
@@ -214,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36F421C820891F4E00F7DD11 /* Collection+MatchingTests.swift in Sources */,
 				36C72ECE208775510094378F /* SetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

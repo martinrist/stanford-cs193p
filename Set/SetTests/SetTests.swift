@@ -151,18 +151,3 @@ class SetTests: XCTestCase {
   }
 }
 
-
-class CollectionExtensionTests: XCTestCase {
-
-  func testAllMatch() {
-    XCTAssertFalse([1, 2, 3].allMatch)
-    XCTAssertTrue([1].allMatch)
-    XCTAssertTrue([1, 1].allMatch)
-  }
-
-  func testAllDifferent() {
-    XCTAssertTrue([1, 2, 3].allDifferent)
-    XCTAssertFalse([1, 1].allDifferent)
-    XCTAssertTrue([1].allDifferent)
-  }
-}
