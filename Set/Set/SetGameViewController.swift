@@ -18,16 +18,12 @@ class SetGameViewController: UIViewController {
 
   @IBOutlet private var cardButtons: [UIButton]!
   @IBOutlet private weak var cardsRemainingLabel: UILabel!
+  @IBOutlet private weak var scoreLabel: UILabel!
   @IBOutlet private weak var dealMoreCardsButton: UIButton!
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     newGame()
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
 
   @IBAction private func touchCard(_ sender: UIButton) {
@@ -38,7 +34,6 @@ class SetGameViewController: UIViewController {
   }
 
   @IBAction func dealMoreCards(_ sender: Any) {
-
     if game.isMatch(cards: game.selectedCards) {
       game.removeSelectedFromBoard()
     }
@@ -52,13 +47,14 @@ class SetGameViewController: UIViewController {
 
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-    game.shuffle()
+    //game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
   private func updateViewFromModel() {
 
     cardsRemainingLabel.text = "Cards Left: \(game.deck.count)"
+    scoreLabel.text = "Score: \(game.score)"
 
     if game.deck.count == 0 || (game.firstEmptySpace == nil &&
       !game.isMatch(cards: game.selectedCards)) {

@@ -246,6 +246,18 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Cards Left: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFS-xF-cWA" userLabel="Cards Left Label">
+                                <rect key="frame" x="16" y="584" width="99" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygd-RN-Hlv" userLabel="Score Label">
+                                <rect key="frame" x="295" y="584" width="64" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffO-Uy-Z8A">
                                 <rect key="frame" x="16" y="612" width="104" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -254,12 +266,6 @@
                                     <action selector="dealMoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N0s-uN-s9c"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Cards Left: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFS-xF-cWA">
-                                <rect key="frame" x="138" y="584" width="99" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrQ-ix-WNK">
                                 <rect key="frame" x="253" y="612" width="106" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -271,13 +277,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hrQ-ix-WNK" firstAttribute="top" secondItem="Ygd-RN-Hlv" secondAttribute="bottom" constant="8" symbolic="YES" id="7dy-IX-cQv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hrQ-ix-WNK" secondAttribute="bottom" constant="16" id="A9J-gW-zEz"/>
+                            <constraint firstItem="GFS-xF-cWA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BD8-yU-n9c"/>
                             <constraint firstItem="ffO-Uy-Z8A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="GoB-vz-4Wl"/>
                             <constraint firstItem="HfT-fi-JoZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KBb-aW-ioC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HfT-fi-JoZ" secondAttribute="trailing" constant="16" id="NHB-LH-Q1A"/>
                             <constraint firstItem="HfT-fi-JoZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="OGC-qo-PHr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hrQ-ix-WNK" secondAttribute="trailing" constant="16" id="Q2t-dz-WAn"/>
-                            <constraint firstItem="GFS-xF-cWA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Qw7-dW-j62"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ygd-RN-Hlv" secondAttribute="trailing" constant="16" id="Waw-GE-dwN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ffO-Uy-Z8A" secondAttribute="bottom" constant="16" id="bYt-PL-hF8"/>
                             <constraint firstItem="ffO-Uy-Z8A" firstAttribute="top" secondItem="GFS-xF-cWA" secondAttribute="bottom" constant="8" symbolic="YES" id="qjN-tf-Ttz"/>
                             <constraint firstItem="GFS-xF-cWA" firstAttribute="top" secondItem="HfT-fi-JoZ" secondAttribute="bottom" constant="16" id="zaX-IB-rBm"/>
@@ -287,6 +295,7 @@
                     <connections>
                         <outlet property="cardsRemainingLabel" destination="GFS-xF-cWA" id="RoS-dJ-FrN"/>
                         <outlet property="dealMoreCardsButton" destination="ffO-Uy-Z8A" id="HuI-pH-mYa"/>
+                        <outlet property="scoreLabel" destination="Ygd-RN-Hlv" id="9Jw-i3-Lgp"/>
                         <outletCollection property="cardButtons" destination="kRF-a0-nvb" collectionClass="NSMutableArray" id="VN6-1n-p9y"/>
                         <outletCollection property="cardButtons" destination="DC9-0j-sbe" collectionClass="NSMutableArray" id="2p5-PM-AoO"/>
                         <outletCollection property="cardButtons" destination="Dvc-3p-Hja" collectionClass="NSMutableArray" id="AUr-LT-kIU"/>
@@ -315,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="36.945812807881772"/>
+            <point key="canvasLocation" x="32.799999999999997" y="36.431784107946029"/>
         </scene>
     </scenes>
 </document>

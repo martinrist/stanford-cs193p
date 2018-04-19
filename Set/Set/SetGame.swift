@@ -14,6 +14,7 @@ struct SetGame {
   var deck = [Card]()
   var board: [Card?]
   var selectedCards = [Card]()
+  var score = 0
 
   init(boardSize: Int) {
     for number in 1...3 {
@@ -62,6 +63,14 @@ struct SetGame {
   }
 
   mutating func select(_ card: Card) {
+
+    if selectedCards.count == 2 && !selectedCards.contains(card) {
+      if isMatch(cards: selectedCards + [card]) {
+        score += 10
+      } else {
+        score -= 1
+      }
+    }
 
     // When any card is chosen and there are already 3 non-matching cards selected
     // deselect the non-matching cards and select the chosen card
