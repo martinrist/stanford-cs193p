@@ -48,7 +48,7 @@ class SetGameViewController: UIViewController {
 
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-    //game.shuffle()
+    game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
@@ -68,7 +68,8 @@ class SetGameViewController: UIViewController {
 
       if let card = card {
         button.isEnabled = true
-        button.setTitle(renderCardTitle(for: card), for: .normal)
+        let nsattrstring = renderCardTitle(for: card)
+        button.setAttributedTitle(nsattrstring, for: .normal)
 
         if game.selectedCards.contains(card) {
           button.layer.borderWidth = 3.0
@@ -81,6 +82,7 @@ class SetGameViewController: UIViewController {
       } else {
         button.isEnabled = false
         button.setTitle(nil, for: .normal)
+        button.setAttributedTitle(nil, for: .normal)
         button.layer.borderWidth = 0.0
         button.layer.borderColor = UIColor.white.cgColor
       }
@@ -106,39 +108,61 @@ class SetGameViewController: UIViewController {
     }
   }
 
-  private func renderCardTitle(for card: Card) -> String {
+  private func renderCardTitle(for card: Card) -> NSAttributedString {
 
-    var title = String(card.number)
+    let shape: Character
+
+    switch card.shape {
+      case .triangle:
+        shape = "▲"
+      case .circle:
+        shape = "●"
+      case .square:
+        shape = "■"
+    }
+    let title = String(repeating: shape, count: card.number)
+
+    let attributes: [NSAttributedStringKey : Any] = [
+      NSAttributedStringKey.foregroundColor: foregroundColour(for: card),
+      NSAttributedStringKey.strokeWidth: strokeWidth(for: card),
+      NSAttributedStringKey.strokeColor: foregroundColour(for: card)
+    ]
+
+    return NSAttributedString(string: title, attributes: attributes)
+  }
+
+  private func foregroundColour(for card: Card) -> UIColor {
+    var colour: UIColor
 
     switch card.colour {
     case .red:
-      title += "R"
+      colour = .red
     case .green:
-      title += "G"
+      colour = .green
     case .blue:
-      title += "B"
-    }
-
-    switch card.shape {
-    case .triangle:
-      title += "T"
-    case .circle:
-      title += "C"
-    case .square:
-      title += "S"
+      colour = .blue
     }
 
     switch card.shading {
     case .clear:
-      title += "X"
+      return colour
     case .solid:
-      title += "Y"
+      return colour.withAlphaComponent(1.0)
     case .striped:
-      title += "Z"
+      return colour.withAlphaComponent(0.25)
     }
 
-    return title
+  }
 
+  private func strokeWidth(for card: Card) -> Int {
+    switch card.shading {
+    case .clear:
+      return 5
+    case .striped:
+      return 0
+    case .solid:
+      return -5
+    }
   }
 
 }
