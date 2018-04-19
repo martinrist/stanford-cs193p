@@ -44,6 +44,14 @@ struct SetGame {
     }
   }
 
+  mutating func removeSelectedFromBoard() {
+    for (index, card) in board.enumerated() {
+      if let card = card, selectedCards.contains(card) {
+        board[index] = nil
+      }
+    }
+  }
+
   var firstEmptySpace: Int? {
     for index in 0..<board.count {
       if board[index] == nil {
@@ -65,12 +73,7 @@ struct SetGame {
     // When any card is chosen and there are already 3 matching cards, replace
     // those three matching cards with new ones from the deck
     if selectedCards.count == 3 && isMatch(cards: selectedCards) {
-      // Remove cards from board
-      for (index, card) in board.enumerated() {
-        if let card = card, selectedCards.contains(card) {
-          board[index] = nil
-        }
-      }
+      removeSelectedFromBoard()
       deal(numberOfCards: 3)
       if selectedCards.contains(card) {
         selectedCards.removeAll()
