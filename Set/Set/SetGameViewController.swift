@@ -38,7 +38,17 @@ class SetGameViewController: UIViewController {
   }
 
   @IBAction func dealMoreCards(_ sender: Any) {
+
+    if game.isMatch(cards: game.selectedCards) {
+      // TODO: Move this to SetGame
+      for (index, card) in game.board.enumerated() {
+        if let card = card, game.selectedCards.contains(card) {
+          game.board[index] = nil
+        }
+      }
+    }
     game.deal(numberOfCards: 3)
+    game.selectedCards.removeAll()
   }
 
   private func newGame() {
