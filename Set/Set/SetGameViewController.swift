@@ -17,6 +17,7 @@ class SetGameViewController: UIViewController {
   }
 
   @IBOutlet private var cardButtons: [UIButton]!
+  @IBOutlet weak var cardsRemainingLabel: UILabel!
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
@@ -35,19 +36,26 @@ class SetGameViewController: UIViewController {
     }
   }
 
+  @IBAction func dealMoreCards(_ sender: Any) {
+    game.deal(numberOfCards: 3)
+  }
+
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-    game.shuffle()
+    //game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
   private func updateViewFromModel() {
+
+    cardsRemainingLabel.text = "Cards Remaining: \(game.deck.count)"
+
     for index in cardButtons.indices {
       let button = cardButtons[index]
       let card = game.board[index]
 
       if let card = card {
-        button.isHidden = false
+        button.isEnabled = true
         button.setTitle(renderCardTitle(for: card), for: .normal)
 
         if game.selectedCards.contains(card) {
@@ -58,7 +66,10 @@ class SetGameViewController: UIViewController {
           button.layer.borderColor = UIColor.white.cgColor
         }
       } else {
-        button.isHidden = true
+        button.isEnabled = false
+        button.setTitle(nil, for: .normal)
+        button.layer.borderWidth = 0.0
+        button.layer.borderColor = UIColor.white.cgColor
       }
     }
 
