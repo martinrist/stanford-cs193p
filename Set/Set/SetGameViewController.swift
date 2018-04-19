@@ -37,7 +37,7 @@ class SetGameViewController: UIViewController {
 
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-    game.shuffle()
+   // game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
@@ -55,6 +55,25 @@ class SetGameViewController: UIViewController {
           button.layer.borderWidth = 0.0
           button.layer.borderColor = UIColor.white.cgColor
         }
+      }
+    }
+
+    if game.selectedCards.count == 3 {
+      if game.isMatch(cards: game.selectedCards) {
+        updateSelectedBorder(toColour: UIColor.green)
+      } else {
+        updateSelectedBorder(toColour: UIColor.red)
+      }
+    }
+
+  }
+
+  func updateSelectedBorder(toColour colour: UIColor) {
+    for card in game.selectedCards {
+      if let buttonIndex = game.board.index(of: card) {
+        let button = cardButtons[buttonIndex]
+        button.layer.borderWidth = 3.0
+        button.layer.borderColor = colour.cgColor
       }
     }
   }

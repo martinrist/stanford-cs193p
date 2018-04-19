@@ -52,7 +52,7 @@ class SetTests: XCTestCase {
     let card2 = Card(number: 2, colour: .red, shape: .square, shading: .clear)
     let card3 = Card(number: 3, colour: .red, shape: .triangle, shading: .clear)
 
-    XCTAssertTrue(game.isMatch(card1: card1, card2: card2, card3: card3))
+    XCTAssertTrue(game.isMatch(cards: [card1, card2, card3]))
   }
 
   func testNotMatching() {
@@ -61,7 +61,7 @@ class SetTests: XCTestCase {
     let card2 = Card(number: 2, colour: .red, shape: .square, shading: .clear)
     let card3 = Card(number: 2, colour: .red, shape: .triangle, shading: .clear)
 
-    XCTAssertFalse(game.isMatch(card1: card1, card2: card2, card3: card3))
+    XCTAssertFalse(game.isMatch(cards: [card1, card2, card3]))
   }
 
   func testSelectThreeCardsFormingSet() {

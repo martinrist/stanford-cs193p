@@ -60,16 +60,17 @@ struct SetGame {
       return
     }
 
-    if selectedCards.count == 3 {
-      if isMatch(card1: selectedCards[0], card2: selectedCards[1], card3: selectedCards[2]) {
-        // Remove cards from board
-        for (index, card) in board.enumerated() {
-          if let card = card, selectedCards.contains(card) {
-            board[index] = nil
-          }
+    if isMatch(cards: selectedCards) {
+      // Remove cards from board
+      for (index, card) in board.enumerated() {
+        if let card = card, selectedCards.contains(card) {
+          board[index] = nil
         }
-        deal(numberOfCards: 3)
       }
+      deal(numberOfCards: 3)
+    }
+
+    if selectedCards.count == 3 {
       selectedCards.removeAll()
     }
 
@@ -84,8 +85,8 @@ struct SetGame {
   //- They all have the same shading or have three different shadings.
   //- They all have the same color or have three different colors.
   //
-  func isMatch(card1: Card, card2: Card, card3: Card) -> Bool {
-    let cards = [card1, card2, card3]
+  func isMatch(cards: [Card]) -> Bool {
+    guard cards.count == 3 else { return false }
 
     let numbers = cards.map { $0.number }
     let colours = cards.map { $0.colour }
