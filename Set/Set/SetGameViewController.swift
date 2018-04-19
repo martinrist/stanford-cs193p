@@ -72,6 +72,7 @@ class SetGameViewController: UIViewController {
 
         if game.selectedCards.contains(card) {
           button.layer.borderWidth = 3.0
+          button.layer.cornerRadius = 8.0
           button.layer.borderColor = UIColor.blue.cgColor
         } else {
           button.layer.borderWidth = 0.0
