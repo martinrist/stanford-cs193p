@@ -47,7 +47,7 @@ class SetGameViewController: UIViewController {
 
   private func newGame() {
     game = SetGame(boardSize: cardButtons.count)
-    //game.shuffle()
+    game.shuffle()
     game.deal(numberOfCards: 12)
   }
 
