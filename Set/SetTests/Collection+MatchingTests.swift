@@ -6,7 +6,8 @@
 //  Copyright © 2018 Martin Rist. All rights reserved.
 //
 
-import Foundation
+import XCTest
+@testable import Set
 
 class CollectionExtensionTests: XCTestCase {
 
