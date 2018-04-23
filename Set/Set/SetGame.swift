@@ -64,6 +64,12 @@ struct SetGame {
 
   mutating func select(_ card: Card) {
 
+    // Deselect card if already selected, otherwise just select it
+    if selectedCards.contains(card) && !isMatch(cards: selectedCards) {
+      selectedCards.remove(at: selectedCards.index(of: card)!)
+      return
+    }
+
     if selectedCards.count == 2 && !selectedCards.contains(card) {
       if isMatch(cards: selectedCards + [card]) {
         score += 10
@@ -92,12 +98,8 @@ struct SetGame {
       return
     }
 
-    // Deselect card if already selected, otherwise just select it
-    if selectedCards.contains(card) {
-      selectedCards.remove(at: selectedCards.index(of: card)!)
-    } else {
-      selectedCards.append(card)
-    }
+    selectedCards.append(card)
+
 
   }
 
