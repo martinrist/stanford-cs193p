@@ -85,12 +85,12 @@ class SetTests: XCTestCase {
 
     XCTAssertEqual(game.selectedCards.count, 1)
     XCTAssertEqual(game.selectedCards[0], card4)
-    XCTAssertFalse(game.board.contains(card1))
-    XCTAssertFalse(game.board.contains(card2))
-    XCTAssertFalse(game.board.contains(card3))
-    XCTAssertTrue(game.board.contains(card4))
-    XCTAssertTrue(game.board.contains(card5))
-    XCTAssertTrue(game.board.contains(card6))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card1))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card2))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card3))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card4))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card5))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card6))
 
   }
 
@@ -115,12 +115,12 @@ class SetTests: XCTestCase {
 
     XCTAssertEqual(game.selectedCards.count, 1)
     XCTAssertEqual(game.selectedCards[0], card4)
-    XCTAssertTrue(game.board.contains(card1))
-    XCTAssertTrue(game.board.contains(card2))
-    XCTAssertTrue(game.board.contains(card3))
-    XCTAssertFalse(game.board.contains(card4))
-    XCTAssertFalse(game.board.contains(card5))
-    XCTAssertFalse(game.board.contains(card6))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card1))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card2))
+    XCTAssertTrue(game.board.flatMap { $0 }.contains(card3))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card4))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card5))
+    XCTAssertFalse(game.board.flatMap { $0 }.contains(card6))
   }
 
   func testSelectThenDeselectOneCard() {

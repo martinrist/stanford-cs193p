@@ -99,8 +99,8 @@ class SetGameViewController: UIViewController {
   }
 
   func updateSelectedBorder(toColour colour: UIColor) {
-    for card in game.selectedCards {
-      if let buttonIndex = game.board.index(of: card) {
+    for buttonIndex in 0..<game.board.count {
+      if let card = game.board[buttonIndex], game.selectedCards.contains(card) {
         let button = cardButtons[buttonIndex]
         button.layer.borderWidth = 3.0
         button.layer.borderColor = colour.cgColor
