@@ -21,7 +21,6 @@
                         <subviews>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uMl-wa-SPS" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="16" y="136.33333333333331" width="343" height="549.33333333333348"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uMl-wa-SPS" secondAttribute="height" multiplier="5:8" id="Aai-Fk-ZLy"/>
                                     <constraint firstAttribute="width" priority="750" constant="800" id="dMn-DL-bFp"/>
